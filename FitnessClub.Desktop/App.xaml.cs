@@ -24,6 +24,7 @@ public partial class App : Application
                 services.AddTransient<AuthorizationPage>();
                 services.AddTransient<RequestListPage>();
                 services.AddTransient<IndividualPlanListPage>();
+                services.AddTransient<RegistrationPage>();
 
                 services.AddDALServices();
             })

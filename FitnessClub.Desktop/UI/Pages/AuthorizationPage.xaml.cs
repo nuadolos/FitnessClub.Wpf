@@ -11,14 +11,17 @@ public partial class AuthorizationPage : Page
 {
     private readonly FitnessClubContext _fitnessClubContext;
     private readonly RequestListPage _requestListPage;
+    private readonly RegistrationPage _registrationPage;
 
-    public AuthorizationPage(FitnessClubContext fitnessClubContext, 
-        RequestListPage requestListPage)
+    public AuthorizationPage(FitnessClubContext fitnessClubContext,
+        RequestListPage requestListPage,
+        RegistrationPage registrationPage)
     {
         InitializeComponent();
 
         _fitnessClubContext = fitnessClubContext;
         _requestListPage = requestListPage;
+        _registrationPage = registrationPage;
     }
 
     private async void btnEntry_Click(object sender, RoutedEventArgs e)
@@ -47,4 +50,7 @@ public partial class AuthorizationPage : Page
 
     private void btnClose_Click(object sender, RoutedEventArgs e) =>
         Application.Current.Shutdown();
+
+    private void linkToRegister_Click(object sender, RoutedEventArgs e) =>
+        AppController.AppFrame.Navigate(_registrationPage);
 }

@@ -21,6 +21,14 @@
                     <TextBlock Style="{StaticResource TextContent}" Text="Пароль:" />
                     <PasswordBox x:Name="passwordBox" />
                 </WrapPanel>
+
+                <WrapPanel HorizontalAlignment="Center">
+                    <TextBlock FontSize="12" Text="Нет учетной записи?" />
+                    <TextBlock Margin="5,0,0,0" FontSize="12">
+                        <Hyperlink x:Name="linkToRegister" Click="linkToRegister_Click">Зарегистрироваться</Hyperlink>
+                    </TextBlock>
+                </WrapPanel>
+
                 <WrapPanel HorizontalAlignment="Center">
                     <Button
                         x:Name="btnEntry"
