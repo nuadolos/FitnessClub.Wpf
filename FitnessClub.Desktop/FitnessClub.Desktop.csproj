@@ -8,7 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\empty-box.png" />
+    <None Remove="Images\fitness.ico" />
+    <None Remove="Images\fitness.png" />
     <None Remove="Images\resume.png" />
+    <None Remove="Images\weights.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,13 +26,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\empty-box.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\fitness.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\fitness.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\resume.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\weights.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Images\error.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\info.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\warning.png">

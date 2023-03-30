@@ -31,7 +31,7 @@ public partial class RequestListPage : Page
         _individualPlanListPage = individualPlanListPage;
     }
 
-    private async Task GetProducts()
+    private async Task GetRequestsAsync()
     {
         if (loadingSpinner.IsLoading)
             return;
@@ -39,10 +39,14 @@ public partial class RequestListPage : Page
         loadingSpinner.IsLoading = true;
         gridLoading.Visibility = Visibility.Visible;
 
+        var userGuid = AppController.CurrentUser!.Guid;
+
         var requests = _fitnessClubContext.Requests
             .Include(r => r.IndividualPlans)
             .Include(r => r.UserClient)
             .Include(r => r.UserManager)
+            .Where(r => r.UserClientGuid == userGuid
+                || r.UserManagerGuid == userGuid)
             .Select(r => new RequestModel {
                 RequestGuid = r.Guid,
                 Title = r.Title,
@@ -61,7 +65,7 @@ public partial class RequestListPage : Page
             requests = requests
                 .Where(p => p.RequestStatusCode == ((RequestStatus)comboBoxRequestStatus.SelectedItem).Code);
 
-        if (textBoxSearch.Text != "Введите для поиска" && string.IsNullOrWhiteSpace(textBoxSearch.Text))
+        if (textBoxSearch.Text != "Введите для поиска" && !string.IsNullOrEmpty(textBoxSearch.Text))
             requests = requests
                 .Where(p => p.Title.ToLower().Contains(textBoxSearch.Text.ToLower()));
 
@@ -83,9 +87,9 @@ public partial class RequestListPage : Page
 
     private async void textBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (textBoxSearch.Text != "Введите для поиска" && string.IsNullOrWhiteSpace(textBoxSearch.Text))
+        if (textBoxSearch.Text != "Введите для поиска")
         {
-            await GetProducts();
+            await GetRequestsAsync();
         }
     }
 
@@ -106,27 +110,30 @@ public partial class RequestListPage : Page
 
     private async void comboBoxSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        await GetProducts();
+        await GetRequestsAsync();
     }
 
     private async void comboBoxRequestStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        await GetProducts();
+        await GetRequestsAsync();
     }
 
     private async void checkBoxDescending_Unchecked(object sender, RoutedEventArgs e)
     {
-        await GetProducts();
+        await GetRequestsAsync();
     }
 
     private async void checkBoxDescending_Checked(object sender, RoutedEventArgs e)
     {
-        await GetProducts();
+        await GetRequestsAsync();
     }
 
-    private void btnAddRequest_Click(object sender, RoutedEventArgs e)
+    private async void btnAddRequest_Click(object sender, RoutedEventArgs e)
     {
-        //AppController.AppFrame.Navigate(new ProductCardPage(null));
+        var dialogResult = _serviceProvider.GetRequiredService<CreateRequestWindow>().ShowDialog();
+
+        if (dialogResult == true)
+            await GetRequestsAsync();
     }
 
     private void listViewRequestList_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -2,6 +2,7 @@
 using FitnessClub.DAL.FitnessClubDataBase;
 using FitnessClub.DAL.FitnessClubDataBase.FakeData;
 using FitnessClub.Desktop.UI.Pages;
+using FitnessClub.Desktop.UI.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -19,8 +20,10 @@ public partial class App : Application
             .ConfigureServices((hostContext, services) =>
             {
                 services.AddSingleton<MainWindow>();
+                services.AddTransient<CreateRequestWindow>();
                 services.AddTransient<AuthorizationPage>();
                 services.AddTransient<RequestListPage>();
+                services.AddTransient<IndividualPlanListPage>();
 
                 services.AddDALServices();
             })
