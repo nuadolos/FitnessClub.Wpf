@@ -6,6 +6,7 @@ public static class NotificationService
 {
     private const string ICON_ERROR_PATH = @"Images/error.png";
     private const string ICON_WARNING_PATH = @"Images/warning.png";
+    private const string ICON_INFO_PATH = @"Images/info.png";
 
     private static ToastContentBuilder ToastContentWithArguments =>
         new ToastContentBuilder()
@@ -15,7 +16,7 @@ public static class NotificationService
 
     public static void NotifyInfo(string title, string description) =>
         ToastContentWithArguments
-            .AddAppLogoOverride(new Uri(Path.GetFullPath(ICON_ERROR_PATH)))
+            .AddAppLogoOverride(new Uri(Path.GetFullPath(ICON_INFO_PATH)))
             .AddText(title)
             .AddText(description)
             .Show();

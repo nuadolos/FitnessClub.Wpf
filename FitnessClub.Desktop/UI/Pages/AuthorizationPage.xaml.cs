@@ -34,26 +34,17 @@ public partial class AuthorizationPage : Page
             .FirstOrDefaultAsync(u => u.PhoneNumber == loginBox.Text 
                 && u.Password == passwordBox.Password);
 
-        //if (user == null)
-        //{
-        //    MessageBox.Show("Пользователь не найден",
-        //        "Авторизация", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    return;
-        //}
+        if (user == null)
+        {
+            NotificationService.NotifyError("Авторизация", "Пользователь не найден.");
+            return;
+        }
 
-        //MainWindow.UserName = $"{user.UserSurname} {user.UserName} {user.UserPatronymic}";
-
+        AppController.CurrentUser = user;
         AppController.AppFrame.Navigate(_requestListPage);
-
-        MessageBox.Show("Вы успешно вошли в систему",
-                "Авторизация", MessageBoxButton.OK, MessageBoxImage.Information);
+        NotificationService.NotifyInfo("Авторизация", "Вы успешно вошли в систему!");
     }
 
-    /// <summary>
-    /// Закрывает приложение
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
     private void btnClose_Click(object sender, RoutedEventArgs e) =>
         Application.Current.Shutdown();
 }
