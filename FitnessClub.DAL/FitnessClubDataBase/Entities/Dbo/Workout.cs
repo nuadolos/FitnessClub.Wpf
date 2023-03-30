@@ -19,4 +19,16 @@ public class Workout : BaseEntity
 
     [InverseProperty("Workouts")]
     public ICollection<Exercise> Exercises { get; set; } = new HashSet<Exercise>();
+
+    [NotMapped]
+    public string AllExecises
+    {
+        get
+        {
+            var exercises = string.Join(", ", Exercises?.Select(e => e.Description)!);
+            return "Упражнения: " + (!string.IsNullOrEmpty(exercises)
+                ? exercises
+                : "отсутствуют");
+        }
+    }
 }

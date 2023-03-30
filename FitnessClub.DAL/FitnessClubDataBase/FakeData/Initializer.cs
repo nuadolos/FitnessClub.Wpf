@@ -43,15 +43,15 @@ public static class Initializer
                 FullName = "Фирзов Анатолий Андреевич",
                 BirthDay = DateTime.Now.AddYears(-22),
                 Gender = "Мужской",
-                PhoneNumber = "79024649922",
-                Password = "password",
+                PhoneNumber = "test1",
+                Password = "1",
                 UserRole = userRoles[0]
             },
             new User {
                 FullName = "Абрамова Кристина Алексеевна",
                 BirthDay = DateTime.Now.AddYears(-19),
                 Gender = "Женский",
-                PhoneNumber = "79015550011",
+                PhoneNumber = "test2",
                 Password = "password",
                 UserRole = userRoles[0]
             },
@@ -59,8 +59,8 @@ public static class Initializer
                 FullName = "Афисова Юлия Владимировна",
                 BirthDay = DateTime.Now.AddYears(-24),
                 Gender = "Женский",
-                PhoneNumber = "79034650000",
-                Password = "password123",
+                PhoneNumber = "test3",
+                Password = "3",
                 UserRole = userRoles[1]
             },
         };
@@ -130,6 +130,28 @@ public static class Initializer
                 IndividualPlan = individualPlans[0],
                 Exercises = new List<Exercise> {
                     exercises[2],
+                    exercises[4]
+                }
+            },
+            new Workout {
+                NumberOfRepetitions = 20,
+                QuantityPerWeek = 7,
+                AssignedOn = DateTime.Now.AddDays(3),
+                IsDone = false,
+                IndividualPlan = individualPlans[0],
+                Exercises = new List<Exercise> {
+                    exercises[1],
+                    exercises[3],
+                    exercises[0],
+                }
+            },
+            new Workout {
+                NumberOfRepetitions = 10,
+                QuantityPerWeek = 7,
+                AssignedOn = DateTime.Now.AddDays(4),
+                IsDone = false,
+                IndividualPlan = individualPlans[0],
+                Exercises = new List<Exercise> {
                     exercises[4]
                 }
             },

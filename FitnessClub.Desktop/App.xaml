@@ -8,6 +8,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="UI/Styles/Text.xaml" />
                 <ResourceDictionary Source="UI/Styles/Another.xaml" />
+                <ResourceDictionary Source="UI/Styles/LightTheme.xaml" />
+                <ResourceDictionary Source="UI/Styles/DataGrid.xaml" />
+                <ResourceDictionary Source="UI/Styles/Icons.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
