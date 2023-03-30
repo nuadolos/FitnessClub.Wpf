@@ -1,7 +1,11 @@
 ﻿using FitnessClub.BLL.Domain;
 using FitnessClub.DAL.FitnessClubDataBase;
 using FitnessClub.DAL.FitnessClubDataBase.Entities.Dictionaries;
+using FitnessClub.Desktop.UI.Utilities;
+using FitnessClub.Desktop.UI.Windows;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,12 +17,18 @@ namespace FitnessClub.Desktop.UI.Pages;
 public partial class RequestListPage : Page
 {
     private readonly FitnessClubContext _fitnessClubContext;
+    private readonly IndividualPlanListPage _individualPlanListPage;
+    private readonly IServiceProvider _serviceProvider;
 
-    public RequestListPage(FitnessClubContext fitnessClubContext)
+    public RequestListPage(FitnessClubContext fitnessClubContext,
+        IServiceProvider serviceProvider,
+        IndividualPlanListPage individualPlanListPage)
     {
         InitializeComponent();
 
         _fitnessClubContext = fitnessClubContext;
+        _serviceProvider = serviceProvider;
+        _individualPlanListPage = individualPlanListPage;
     }
 
     private async Task GetProducts()
@@ -34,6 +44,7 @@ public partial class RequestListPage : Page
             .Include(r => r.UserClient)
             .Include(r => r.UserManager)
             .Select(r => new RequestModel {
+                RequestGuid = r.Guid,
                 Title = r.Title,
                 Porpose = r.Porpose,
                 RequestStatusCode = r.RequestStatusCode,
@@ -89,7 +100,8 @@ public partial class RequestListPage : Page
 
     private void listViewRequestList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
-        //AppController.AppFrame.Navigate(new ProductCardPage(listViewProductList.SelectedItem as Product));
+        _individualPlanListPage.RequestGuid = (listViewRequestList.SelectedItem as RequestModel)?.RequestGuid;
+        AppController.AppFrame.Navigate(_individualPlanListPage);
     }
 
     private async void comboBoxSort_SelectionChanged(object sender, SelectionChangedEventArgs e)

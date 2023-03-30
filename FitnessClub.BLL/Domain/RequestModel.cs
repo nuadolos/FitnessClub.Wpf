@@ -3,6 +3,7 @@
 #nullable disable
 public class RequestModel
 {
+    public Guid RequestGuid { get; set; }
     public string Title { get; set; }
     public string Porpose { get; set; }
     public string RequestStatusCode{ get; set; }
